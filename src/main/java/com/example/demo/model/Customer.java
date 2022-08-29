@@ -18,16 +18,16 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long account_no;
 	@Column
-	@NotBlank
+
 	private String name;
 	@Column
-	@NotBlank
+
 	private String account_type;
 	@Column
-	@NotBlank
+
 	private Double amount;
 	@Column
-	@NotBlank
+	
 	private Long contact;
 	public Long getAccount_no() {
 		return account_no;

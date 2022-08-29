@@ -2,10 +2,13 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import com.example.demo.exception.UserAlredyExist;
 import com.example.demo.model.Customer;
 import com.example.demo.model.CustomerModel;
 import com.example.demo.repository.CustomerRepository;
@@ -46,21 +49,22 @@ public class CustomerServiceImp implements CustomerService {
 		return cust;
 	}
 
-	public boolean save(CustomerModel customerModel) {					//DONE
+	public boolean save(@Validated CustomerModel customerModel) {					//DONE
+		
+		Customer custCheck = customerRepository.findFirstByContact(customerModel.getContact());
+		if(Objects.nonNull(custCheck)) {
+			
+			throw new  UserAlredyExist("User Already Exist with Contact : "+custCheck.getContact());
+		}
 		Customer cust = new Customer();
 		cust.setAccount_no(customerModel.getAccount_no());
 		cust.setAccount_type(customerModel.getAccount_type());
 		cust.setAmount(customerModel.getAmount());
 		cust.setContact(customerModel.getContact());
 		cust.setName(customerModel.getName());
-		try {
 		customerRepository.save(cust);
 		return true;
-		}
-		catch (Exception e) {
-			System.out.println("Save time Exception : " +e);
-		}
-		return false;
+		
 	}
 
 	public Long delete(Long account_no) {					//DONE
