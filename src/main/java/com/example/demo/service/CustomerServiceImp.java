@@ -34,17 +34,25 @@ public class CustomerServiceImp implements CustomerService {
 		return customer;
 	}
 
-	public Customer getCustomerById(Long account_no) {					//DONE
-		return customerRepository.findById(account_no).get();
+	public CustomerModel getCustomerById(Long account_no) {					//DONE
+		Customer myCustomer = customerRepository.findById(account_no).get();
+		
+		CustomerModel cust = new CustomerModel();
+		cust.setAccount_no(myCustomer.getAccount_no());
+		cust.setAccount_type(myCustomer.getAccount_type());
+		cust.setAmount(myCustomer.getAmount());
+		cust.setContact(myCustomer.getContact());
+		cust.setName(myCustomer.getName());
+		return cust;
 	}
 
-	public boolean save(Customer customer) {					//DONE
+	public boolean save(CustomerModel customerModel) {					//DONE
 		Customer cust = new Customer();
-		cust.setAccount_no(customer.getAccount_no());
-		cust.setAccount_type(customer.getAccount_type());
-		cust.setAmount(customer.getAmount());
-		cust.setContact(customer.getContact());
-		cust.setName(customer.getName());
+		cust.setAccount_no(customerModel.getAccount_no());
+		cust.setAccount_type(customerModel.getAccount_type());
+		cust.setAmount(customerModel.getAmount());
+		cust.setContact(customerModel.getContact());
+		cust.setName(customerModel.getName());
 		try {
 		customerRepository.save(cust);
 		return true;
@@ -59,14 +67,15 @@ public class CustomerServiceImp implements CustomerService {
 		customerRepository.deleteById(account_no);
 	}
 
-	public void update(Customer customer, Long account_no) {
+	public void update(CustomerModel customerModel, Long account_no) {				//Done
 		Customer myCustomer = customerRepository.findById(account_no).get();
-		//myCustomer.setAccount_no(customer.getAccount_no());
-		myCustomer.setAccount_type(customer.getAccount_type());
-		myCustomer.setAmount(customer.getAmount());
-		myCustomer.setContact(customer.getContact());
-		myCustomer.setName(customer.getName());
+		myCustomer.setAccount_no(customerModel.getAccount_no());
+		myCustomer.setAccount_type(customerModel.getAccount_type());
+		myCustomer.setAmount(customerModel.getAmount());
+		myCustomer.setContact(customerModel.getContact());
+		myCustomer.setName(customerModel.getName());
 		customerRepository.save(myCustomer);
 		//customerRepository.save(customer);
 	}
+
 }

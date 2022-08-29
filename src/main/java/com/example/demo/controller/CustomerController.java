@@ -30,7 +30,7 @@ public class CustomerController{
 	}
 
 	@GetMapping("/customer/{account_no}")						//DONE
-	private Customer getCustomer(@PathVariable("account_no") Long account_no) {		
+	private CustomerModel getCustomer(@PathVariable("account_no") Long account_no) {		
 		return customerService.getCustomerById(account_no);
 	}
 
@@ -40,15 +40,15 @@ public class CustomerController{
 	}
 
 	@PostMapping("/customer")
-	private boolean createCustomer(@RequestBody Customer customer) {	
+	private boolean createCustomer(@RequestBody CustomerModel customer) {	
 		return customerService.save(customer);
 		
 	}
 
 	@PutMapping("/customer/{account_no}")								
-	private Customer update(@RequestBody Customer customer,@PathVariable("account_no") Long account_no) {
-		customerService.update(customer, account_no);
-		return customer;
+	private CustomerModel update(@RequestBody CustomerModel customerModel,@PathVariable("account_no") Long account_no) {
+		customerService.update(customerModel, account_no);
+		return customerModel;
 	}
 
 	

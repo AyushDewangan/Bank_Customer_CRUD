@@ -9,12 +9,12 @@ public interface CustomerService {
 	
 	public List<CustomerModel> getAllCustomer();
 	
-	public Customer getCustomerById(Long account_no);
+	public CustomerModel getCustomerById(Long account_no);
 	
-	public boolean save(Customer customer);
+	public boolean save(CustomerModel customerModel);
 	
 	public void delete(Long account_no);
 	
-	public void update(Customer customer, Long account_no);
+	public void update(CustomerModel customerModel, Long account_no);
 
 }
