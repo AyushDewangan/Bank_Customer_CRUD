@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,36 +20,38 @@ import com.example.demo.service.CustomerServiceImp;
 
 @RestController
 public class CustomerController{
+							
+	private final CustomerService customerService;
 	
-	@Autowired						
-	CustomerService customerService;
-	CustomerRepository customerRepository;
+	public CustomerController(CustomerService customerService) {
+		this.customerService = customerService;
+	}
 
 	@GetMapping("/customer")									//DONE
-	private List<CustomerModel> getAllCustomer() {
-		return customerService.getAllCustomer();
+	private ResponseEntity<List<CustomerModel>> getAllCustomer() {
+		return ResponseEntity.ok().body(customerService.getAllCustomer());
 	}
 
 	@GetMapping("/customer/{account_no}")						//DONE
-	private CustomerModel getCustomer(@PathVariable("account_no") Long account_no) {		
-		return customerService.getCustomerById(account_no);
+	private ResponseEntity<CustomerModel> getCustomer(@PathVariable("account_no") Long account_no) {		
+		return ResponseEntity.ok().body(customerService.getCustomerById(account_no));
 	}
 
 	@DeleteMapping("/customer/{account_no}")					//DONE
-	private void deleteCostomer(@PathVariable("account_no") Long account_no) {
-		customerService.delete(account_no);
+	private ResponseEntity<Long> deleteCostomer(@PathVariable("account_no") Long account_no) {
+		return ResponseEntity.ok().body(customerService.delete(account_no));
 	}
 
 	@PostMapping("/customer")
-	private boolean createCustomer(@RequestBody CustomerModel customer) {	
-		return customerService.save(customer);
+	private ResponseEntity<Boolean> createCustomer(@RequestBody CustomerModel customer) {	
+		return ResponseEntity.ok().body(customerService.save(customer));
 		
 	}
 
 	@PutMapping("/customer/{account_no}")								
-	private CustomerModel update(@RequestBody CustomerModel customerModel,@PathVariable("account_no") Long account_no) {
+	private ResponseEntity<CustomerModel> update(@RequestBody CustomerModel customerModel,@PathVariable("account_no") Long account_no) {
 		customerService.update(customerModel, account_no);
-		return customerModel;
+		return ResponseEntity.ok().body(customerModel);
 	}
 
 	

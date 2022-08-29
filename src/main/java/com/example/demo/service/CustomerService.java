@@ -13,8 +13,8 @@ public interface CustomerService {
 	
 	public boolean save(CustomerModel customerModel);
 	
-	public void delete(Long account_no);
+	public Long delete(Long account_no);
 	
-	public void update(CustomerModel customerModel, Long account_no);
+	public Boolean update(CustomerModel customerModel, Long account_no);
 
 }

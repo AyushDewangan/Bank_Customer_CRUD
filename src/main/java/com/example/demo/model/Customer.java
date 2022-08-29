@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 
@@ -14,20 +15,19 @@ import com.sun.istack.NotNull;
 public class Customer {
 	@Id
 	@Column
-	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long account_no;
 	@Column
-	@NotNull
+	@NotBlank
 	private String name;
 	@Column
-	@NotNull
+	@NotBlank
 	private String account_type;
 	@Column
-	@NotNull
+	@NotBlank
 	private Double amount;
 	@Column
-	@NotNull
+	@NotBlank
 	private Long contact;
 	public Long getAccount_no() {
 		return account_no;

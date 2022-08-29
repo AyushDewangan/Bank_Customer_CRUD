@@ -63,18 +63,27 @@ public class CustomerServiceImp implements CustomerService {
 		return false;
 	}
 
-	public void delete(Long account_no) {					//DONE
+	public Long delete(Long account_no) {					//DONE
 		customerRepository.deleteById(account_no);
+		return account_no;
 	}
 
-	public void update(CustomerModel customerModel, Long account_no) {				//Done
+	public Boolean update(CustomerModel customerModel, Long account_no) {				//Done
 		Customer myCustomer = customerRepository.findById(account_no).get();
 		myCustomer.setAccount_no(customerModel.getAccount_no());
 		myCustomer.setAccount_type(customerModel.getAccount_type());
 		myCustomer.setAmount(customerModel.getAmount());
 		myCustomer.setContact(customerModel.getContact());
 		myCustomer.setName(customerModel.getName());
+		try {
 		customerRepository.save(myCustomer);
+		return true;
+		}
+		catch (Exception e) {
+			System.out.println("Not able to update...");
+		}
+		return false;
+		
 		//customerRepository.save(customer);
 	}
 
