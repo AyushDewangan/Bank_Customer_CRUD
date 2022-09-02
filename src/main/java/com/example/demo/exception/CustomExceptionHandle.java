@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 
 @RestControllerAdvice
 public class CustomExceptionHandle {
-	
+
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(UserAlredyExist.class)
 	public Map<String, String> handelUserAlredyExist(UserAlredyExist ex) {

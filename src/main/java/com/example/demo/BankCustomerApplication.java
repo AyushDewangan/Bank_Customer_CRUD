@@ -8,7 +8,7 @@ public class BankCustomerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankCustomerApplication.class, args);
-		System.out.println("Spring Working...");
+		System.out.println("Spring Boot Working...");
 	}
 
 }
