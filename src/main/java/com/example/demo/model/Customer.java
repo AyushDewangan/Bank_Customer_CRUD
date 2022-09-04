@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -14,25 +15,21 @@ public class Customer {
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long accountNo;
-	@Column
-
+	@NotNull
 	private String name;
-	@Column
-
+	@NotNull
 	private String accountType;
-	@Column
-
+	@NotNull
 	private Double amount;
-	@Column
-
+	@NotNull
 	private Long contact;
 
-	public Long getAccount_no() {
+	public Long getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccount_no(Long account_no) {
-		this.accountNo = account_no;
+	public void setAccountNo(Long accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public String getName() {
@@ -43,12 +40,12 @@ public class Customer {
 		this.name = name;
 	}
 
-	public String getAccount_type() {
+	public String getAccountType() {
 		return accountType;
 	}
 
-	public void setAccount_type(String account_type) {
-		this.accountType = account_type;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public Double getAmount() {

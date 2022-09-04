@@ -1,19 +1,27 @@
 package com.example.demo.model;
 
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 public class CustomerModel {
 
+	@Id
 	private Long accountNo;
+	@NotNull
 	private String name;
+	@NotNull
 	private String accountType;
+	@NotNull
 	private Double amount;
+	@NotNull
 	private Long contact;
 
-	public Long getAccount_no() {
+	public Long getAccountNo() {
 		return accountNo;
 	}
 
-	public void setAccount_no(Long account_no) {
-		this.accountNo = account_no;
+	public void setAccountNo(Long accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public String getName() {
@@ -24,12 +32,12 @@ public class CustomerModel {
 		this.name = name;
 	}
 
-	public String getAccount_type() {
+	public String getAccountType() {
 		return accountType;
 	}
 
-	public void setAccount_type(String account_type) {
-		this.accountType = account_type;
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
 	}
 
 	public Double getAmount() {
