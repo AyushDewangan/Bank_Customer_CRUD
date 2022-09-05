@@ -50,7 +50,7 @@ public class CustomerServiceImp implements CustomerService {
 		return cust;
 	}
 
-	public boolean save(@Validated CustomerModel customerModel) { // DONE
+	public boolean save(@Validated CustomerModel customerModel) {
 
 		Customer custCheck = customerRepository.findFirstByContact(customerModel.getContact());
 		if (Objects.nonNull(custCheck)) {
@@ -68,12 +68,12 @@ public class CustomerServiceImp implements CustomerService {
 
 	}
 
-	public Long delete(Long accountNo) {
-		if(customerRepository.findById(accountNo).isPresent()) {
+	public Long delete(@Validated Long accountNo) {
+		if(!customerRepository.findById(accountNo).isPresent()) {
+			throw new UserNotExist("User not exist : "+accountNo);
+		}
 		customerRepository.deleteById(accountNo);
 		return accountNo;
-		}
-		throw new UserNotExist("User not exist : "+accountNo);
 	}
 
 	public Boolean update(@Validated CustomerModel customerModel) { // Done
