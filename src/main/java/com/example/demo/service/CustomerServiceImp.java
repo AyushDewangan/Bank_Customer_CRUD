@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.example.demo.entity.Customer;
 import com.example.demo.exception.UserAlredyExist;
 import com.example.demo.exception.UserNotExist;
-import com.example.demo.model.Customer;
 import com.example.demo.model.CustomerModel;
 import com.example.demo.repository.CustomerRepository;
 
