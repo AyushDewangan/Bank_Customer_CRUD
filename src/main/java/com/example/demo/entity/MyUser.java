@@ -1,8 +1,13 @@
 package com.example.demo.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -17,6 +22,18 @@ public class MyUser {
 	private String name;
 	@NotBlank
 	private String password;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MyRole> role;
+
+	public List<MyRole> getRole() {
+		return role;
+	}
+
+	public void setRole(List<MyRole> role) {
+		this.role = role;
+	}
+
 
 	public int getId() {
 		return id;

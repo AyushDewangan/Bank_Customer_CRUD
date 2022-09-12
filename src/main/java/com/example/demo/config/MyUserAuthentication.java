@@ -1,21 +1,28 @@
 package com.example.demo.config;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import com.example.demo.entity.MyRole;
 
 public class MyUserAuthentication implements Authentication {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String principal;
-	private final String password;
+	private final String principal;	//User name
+	private final String password;	//credential
+	private final List<MyRole> role;
 
-	public MyUserAuthentication(String principal, String password) {
+	public MyUserAuthentication(String principal, String password, List<MyRole> role) {
 		this.principal = principal;
 		this.password = password;
+		this.role=role;
 	}
 
 	@Override
@@ -25,7 +32,12 @@ public class MyUserAuthentication implements Authentication {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		List<SimpleGrantedAuthority> sgaList = new ArrayList<>();
+		role.stream().forEach(myRole -> {
+			SimpleGrantedAuthority sga = new SimpleGrantedAuthority(myRole.getRole());
+			sgaList.add(sga);
+		});
+		return sgaList;
 	}
 
 	@Override

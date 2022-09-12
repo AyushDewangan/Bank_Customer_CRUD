@@ -33,7 +33,7 @@ public class MyAuthManager implements AuthenticationManager {
 			throw new UserNotFoundException("User Not Found");
 		}
 
-		MyUserAuthentication myUserAuthentication = new MyUserAuthentication(userName, password);
+		MyUserAuthentication myUserAuthentication = new MyUserAuthentication(userName, password,  user.getRole());
 		myUserAuthentication.setAuthenticated(true);
 		return myUserAuthentication;
 	}

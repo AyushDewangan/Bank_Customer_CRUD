@@ -1,8 +1,13 @@
 package com.example.demo.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 public class MyUserModel {
@@ -14,6 +19,16 @@ public class MyUserModel {
 	private String name;
 	@NotBlank
 	private String password;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MyRoleModel> roleModel;
+
+	public List<MyRoleModel> getRoleModel() {
+		return roleModel;
+	}
+
+	public void setRoleModel(List<MyRoleModel> roleModel) {
+		this.roleModel = roleModel;
+	}
 
 	public int getId() {
 		return id;
