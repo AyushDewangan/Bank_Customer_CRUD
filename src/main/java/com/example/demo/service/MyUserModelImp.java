@@ -1,36 +1,39 @@
 package com.example.demo.service;
 
-import java.util.Objects;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.demo.entity.MyUser;
-import com.example.demo.exception.UserAlredyExist;
 import com.example.demo.model.MyUserModel;
 import com.example.demo.repository.MyUserRepository;
 
 @Service
 public class MyUserModelImp implements MyUserService {
 
-	@Autowired
-	MyUserRepository myUserRepository;
+	private final MyUserRepository myUserRepository;
+	@SuppressWarnings("unused")
+	private final PasswordEncoder passwordEncoder;
+
+	public MyUserModelImp(MyUserRepository myUserRepository, PasswordEncoder passwordEncoder) {
+		super();
+		this.myUserRepository = myUserRepository;
+		this.passwordEncoder = passwordEncoder;
+	}
 
 	@Override
 	public boolean save(@Validated MyUserModel myUserModel) {
-		Optional<MyUser> myUserCheck = myUserRepository.findById(myUserModel.getId());
-		if(Objects.nonNull(myUserCheck)) {
-			//return throw new UserAlredyExist("bad credentials");
+		MyUser myUser = new MyUser();
+		myUser.setId(myUserModel.getId());
+		myUser.setName(myUserModel.getName());
+		myUser.setPassword(passwordEncoder.encode(myUserModel.getPassword()));
+		try {
+			myUserRepository.save(myUser);
+			return true;
+		} catch (Exception e) {
 			return false;
 		}
-		MyUser myUser = new MyUser();
-		//myUser.setId(myUserModel.getId());
-		myUser.setName(myUserModel.getName());
-		myUser.setPassword(myUserModel.getPassword());
-		myUserRepository.save(myUser);
-		return false;
+
 	}
 
 }
