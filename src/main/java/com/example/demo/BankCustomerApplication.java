@@ -10,11 +10,8 @@ public class BankCustomerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BankCustomerApplication.class, args);
-<<<<<<< HEAD
 		System.out.println("Trace");
-=======
 		System.out.println("Trace2");
->>>>>>> stash
 	}
 
 	@Bean
